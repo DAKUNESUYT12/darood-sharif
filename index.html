@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Darood Sharif Animation</title>
   <style>
     html,body{height:100%;margin:0;}
@@ -18,23 +18,23 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      font-family: 'Poppins', sans-serif;
     }
 
     .darood {
       position: absolute;
       white-space: nowrap;
-      font-size: 2.8rem;
-      font-weight: 700;
+      font-size: 2.3rem;
+      font-weight: bold;
       color: gold;
-      text-shadow: 2px 2px 15px rgba(0,0,0,0.85);
-      animation: slide 12s linear infinite;
+      text-shadow: 2px 2px 12px rgba(0,0,0,0.8);
+      animation: slide 40s linear infinite;
       z-index: 2;
     }
 
     @keyframes slide {
       0% { transform: translateX(100vw); }
-      100% { transform: translateX(-100%); }
+      100% { transform: translateX(-250%); }
     }
 
     .overlay {
@@ -44,9 +44,8 @@
       z-index: 1;
     }
 
-    /* Hide default audio controls but keep element available */
     audio { display: none; }
-    /* small play overlay when autoplay blocked */
+
     #playBtn {
       position: absolute;
       z-index: 3;
@@ -66,9 +65,11 @@
 <body>
   <div class="overlay"></div>
 
-  <div class="darood">ﷺ Allahumma Salli Ala Muhammad Wa Ala Aali Muhammad ﷺ</div>
+  <div class="darood">
+    اللّٰهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ، 
+    اللّٰهُمَّ بَارِكْ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ ﷺ
+  </div>
 
-  <!-- put your darood.mp3 in the same folder -->
   <audio id="bgAudio" loop>
     <source src="darood.mp3" type="audio/mpeg">
   </audio>
@@ -79,9 +80,7 @@
     const audio = document.getElementById('bgAudio');
     const playBtn = document.getElementById('playBtn');
 
-    // Try autoplay
     audio.play().catch(() => {
-      // If blocked, show play button
       playBtn.style.display = 'block';
     });
 
@@ -89,13 +88,12 @@
       audio.play().then(() => {
         playBtn.style.display = 'none';
       }).catch(()=> {
-        alert('Playback failed — try unmuting your browser or click the page.');
+        alert('Playback failed — please unmute your browser or click the page.');
       });
     });
 
-    // Optional: if user interacts anywhere, try to play (mobile friendly)
     window.addEventListener('touchstart', () => {
-      if (audio.paused) audio.play().catch(()=>{/*ignore*/});
+      if (audio.paused) audio.play().catch(()=>{});
     }, { once: true });
   </script>
 </body>
