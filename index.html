@@ -1,64 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Darood Sharif Animation</title>
   <style>
-    html,body{height:100%;margin:0;}
-    body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      height: 100vh;
-      width: 100vw;
-      background-image: url('https://www.shutterstock.com/image-vector/beautiful-islamic-darood-sharif-calligraphy-260nw-2161264655.jpg');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Poppins', sans-serif;
+    html,body{
+      height:100%;
+      margin:0;
+      padding:0;
+      overflow:hidden;
+      background-image:url('https://www.shutterstock.com/image-vector/beautiful-islamic-darood-sharif-calligraphy-260nw-2161264655.jpg');
+      background-size:cover;
+      background-position:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family:'Scheherazade New', serif;
     }
 
     .darood {
-      position: absolute;
-      white-space: nowrap;
-      font-size: 2.3rem;
-      font-weight: bold;
-      color: gold;
-      text-shadow: 2px 2px 12px rgba(0,0,0,0.8);
-      animation: slide 40s linear infinite;
-      z-index: 2;
+      position:absolute;
+      white-space:pre-line;
+      text-align:center;
+      width:90%;
+      font-size:2.2rem;
+      font-weight:bold;
+      line-height:1.6;
+      color:gold;
+      text-shadow:0 0 10px rgba(255,215,0,0.8),
+                   0 0 20px rgba(255,215,0,0.6),
+                   0 0 30px rgba(255,215,0,0.4);
+      animation: scrollUp 50s linear infinite, glow 2.5s ease-in-out infinite alternate;
+      z-index:2;
     }
 
-    @keyframes slide {
-      0% { transform: translateX(100vw); }
-      100% { transform: translateX(-250%); }
+    @keyframes scrollUp {
+      0% { transform: translateY(100vh); }
+      100% { transform: translateY(-220%); }
+    }
+
+    @keyframes glow {
+      from { text-shadow:0 0 5px rgba(255,215,0,0.6),0 0 10px rgba(255,215,0,0.4); }
+      to   { text-shadow:0 0 25px rgba(255,215,0,1),0 0 50px rgba(255,215,0,0.8); }
     }
 
     .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.35);
-      z-index: 1;
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.35);
+      z-index:1;
     }
 
-    audio { display: none; }
+    audio { display:none; }
 
     #playBtn {
-      position: absolute;
-      z-index: 3;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%,-50%);
-      background: rgba(0,0,0,0.6);
-      color: white;
-      padding: 12px 18px;
-      border-radius: 8px;
-      font-weight: 600;
-      display: none;
-      cursor: pointer;
+      position:absolute;
+      z-index:3;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      background:rgba(0,0,0,0.6);
+      color:white;
+      padding:12px 18px;
+      border-radius:8px;
+      font-weight:600;
+      display:none;
+      cursor:pointer;
     }
   </style>
 </head>
@@ -66,8 +74,8 @@
   <div class="overlay"></div>
 
   <div class="darood">
-    اللّٰهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ، 
-    اللّٰهُمَّ بَارِكْ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ ﷺ
+اللّٰهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ
+اللّٰهُمَّ بَارِكْ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ ﷺ
   </div>
 
   <audio id="bgAudio" loop>
@@ -80,18 +88,14 @@
     const audio = document.getElementById('bgAudio');
     const playBtn = document.getElementById('playBtn');
 
-    audio.play().catch(() => {
-      playBtn.style.display = 'block';
-    });
+    // Try autoplay
+    audio.play().catch(() => playBtn.style.display = 'block');
 
     playBtn.addEventListener('click', () => {
-      audio.play().then(() => {
-        playBtn.style.display = 'none';
-      }).catch(()=> {
-        alert('Playback failed — please unmute your browser or click the page.');
-      });
+      audio.play().then(() => playBtn.style.display = 'none');
     });
 
+    // For mobile tap-start
     window.addEventListener('touchstart', () => {
       if (audio.paused) audio.play().catch(()=>{});
     }, { once: true });
